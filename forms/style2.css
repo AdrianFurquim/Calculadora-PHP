@@ -13,8 +13,8 @@ header{
     color: white;
     background-color: black;
     width: 345px;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
     display: flex;
     justify-content: space-between;
     border-top: 3px solid white;
@@ -24,13 +24,13 @@ header{
 
 
 header div{
-    margin-top: 10px;
-    margin-left: 13px;
-    margin-right: 13px;
+    margin-top: 13px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .horario{
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .som_camera{
@@ -55,7 +55,6 @@ header div{
     width: 10px;
     border-radius: 100%;
     margin-top: 10px;
-    
 }
 
 .lente{
@@ -86,11 +85,19 @@ section{
     border-left: 3px solid white;
 }
 
-section div{
-    margin: auto;
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-bottom: 10px;
 }
 
-section div button{
+section form div, section div{
+    margin: auto;
+    
+}
+
+section form div input{
     height: 65px;
     width: 65px;
     border: none;
@@ -101,7 +108,7 @@ section div button{
     margin-right: 3px;
 }
 
-section div button:hover{
+section form div input:hover{
     background-color: grey;
 }
 
@@ -135,8 +142,8 @@ footer{
     color: white;
     background-color: black;
     width: 345px;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
     border-right: 3px solid white;
     border-left: 3px solid white;
     border-bottom: 3px solid white;
