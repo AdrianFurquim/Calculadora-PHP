@@ -102,37 +102,55 @@ section form div input{
     width: 65px;
     border: none;
     border-radius: 100%;
-    font-size: 24px;
+    font-size: 28px;
     transition: 0.5s;
     margin-left: 3px;
     margin-right: 3px;
+    background-color: rgb(66, 66, 66);
+    color: white;
 }
 
 section form div input:hover{
     background-color: grey;
 }
 
-.igual{
-    background-color: orange;
+.funcao{
+    background-color: rgb(255, 136, 0);
 }
 
-.igual:hover{
-    background-color:rgb(189, 123, 0);
+.funcao:hover{
+    background-color: rgb(223, 119, 0);
+}
+
+.ots_funcao{
+    background-color: rgb(199, 199, 199);
+    color: black;
+}
+
+.ots_funcao:hover{
+    background-color: rgb(177, 177, 177);
 }
 
 .zero{
     height: 65px;
     width: 140px;
     border-radius: 30px;
+    text-align: start;
+    padding-left: 27px;
 }
 
 .resultado{
     background-color: black;
     width: 85%;
-    font-size: 35px;
+    font-size: 65px;
     padding: 5px;
     color: white;
     text-align: end;
+}
+
+.resultado p{
+    margin-bottom: -60px;
+    margin-right: 15px;
 }
 
 /* Style do final da calculadora ===================================================================================================================================== */

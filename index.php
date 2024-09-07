@@ -9,6 +9,11 @@
     $num = "";
     $error = false;
 
+    // Definindo fuso-horário de São Paulo como padrão.
+    date_default_timezone_set('America/Sao_Paulo');
+    // Definindo horário para mostrar na tela.
+    $agora = date('H:i');
+
     // Se o número foi enviado e não houve erro, concatena o número.
     if (isset($_POST['numero'])) {
         if (isset($_POST['input']) && !is_numeric($_POST['input'])) {
@@ -89,14 +94,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./forms/style2.css">
+    <link rel="stylesheet" href="./forms/style3.css">
 
     <title>Calculadora</title>
 </head>
 <body>
 
     <header>
-        <div class="horario">0:00</div>
+        <div class="horario">
+            <?php echo $agora ?>
+        </div>
         <div class="som_camera">
             <div class="som">-</div>
             <div class="camera">
@@ -132,37 +139,37 @@
             <input type="hidden" name="input" value="<?php echo $num; ?>">
 
             <div>
-                <input type="submit" name="apagar" value="AC">
-                <input type="submit" name="+/-" value="+/-">
-                <input type="submit" name="operacao" value="%">
-                <input type="submit" name="operacao" value="÷">
+                <input class="ots_funcao" type="submit" name="apagar" value="AC">
+                <input class="ots_funcao" type="submit" name="+/-" value="+/-">
+                <input class="ots_funcao" type="submit" name="operacao" value="%">
+                <input class="funcao" type="submit" name="operacao" value="÷">
             </div>
 
             <div>
                 <input type="submit" name="numero" value="7">
                 <input type="submit" name="numero" value="8">
                 <input type="submit" name="numero" value="9">
-                <input type="submit" name="operacao" value="x">
+                <input class="funcao" type="submit" name="operacao" value="x">
             </div>
 
             <div>
                 <input type="submit" name="numero" value="4">
                 <input type="submit" name="numero" value="5">
                 <input type="submit" name="numero" value="6">
-                <input type="submit" name="operacao" value="-">
+                <input class="funcao" type="submit" name="operacao" value="-">
             </div>
 
             <div>
                 <input type="submit" name="numero" value="1">
                 <input type="submit" name="numero" value="2">
                 <input type="submit" name="numero" value="3">
-                <input type="submit" name="operacao" value="+">
+                <input class="funcao" type="submit" name="operacao" value="+">
             </div>
 
             <div>
                 <input class="zero" type="submit" name="numero" value="0">
                 <input type="submit" name="numero" value=".">
-                <input class="igual" name="igual" type="submit" value="=">
+                <input class="funcao" name="igual" type="submit" value="=">
             </div>
         </form>
 
@@ -171,5 +178,7 @@
     <footer>
         <div class="linha">-</div>
     </footer>
+
+    <script src="./forms/script.js"></script>
 </body>
 </html>
