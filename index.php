@@ -9,6 +9,8 @@
     $num = "";
     $error = false;
 
+    $num_tela = "";
+
     // Definindo fuso-horário de São Paulo como padrão.
     date_default_timezone_set('America/Sao_Paulo');
     // Definindo horário para mostrar na tela.
@@ -19,10 +21,20 @@
         if (isset($_POST['input']) && !is_numeric($_POST['input'])) {
             // Se a entrada atual é um erro, reseta o valor de $num.
             $num = $_POST['numero'];
+            $num_tela = $_POST['numero'];
+            
         } else {
             // Concatenando o número atual ao valor anterior.
-            $num = isset($_POST['input']) ? $_POST['input'] . $_POST['numero'] : $_POST['numero'];
+            $ver_valor = isset($_POST['input']) ? $_POST['input'] . $_POST['numero'] : $_POST['numero'];
+
+            if (strlen($ver_valor) <= 8) {
+                $num = isset($_POST['input']) ? $_POST['input'] . $_POST['numero'] : $_POST['numero'];
+                $num_tela = isset($_POST['input']) ? $_POST['input'] . $_POST['numero'] : $_POST['numero'];
+            }else{
+                $num_tela = "N max: 8";
+            }
         }
+            
     }
 
     if (isset($_POST['operacao'])) {
@@ -35,6 +47,7 @@
         setcookie($cookie_name2, $cookie_value2, time() + (86400 * 30), "/");
 
         $num = "";
+        $num_tela = "";
     }
 
     // Caso aperte o botão +/- para inverter de positivo ou negativo.
@@ -43,6 +56,7 @@
         if ($num != "" && is_numeric($num)) {
             $result = $num * -1;
             $num = $result;
+            $num_tela = $result;
         }
     }
 
@@ -66,8 +80,9 @@
                     if ($num != 0) {
                         $result = $_COOKIE['numero'] / $num;
                     } else {
-                        $result = "Erro: divisão por zero";
+                        $result = "Erro: d/0";
                         $error = true;
+                        
                     }
                     break;
                 case "%":
@@ -79,13 +94,21 @@
             }
             // Atualizando na tela.
             $num = $result;
+
+            // Se houver um erro, exibir a mensagem.
+            if ($error) {
+                $num_tela = $result;
+            }else{
+                if(strlen($result) <= 8){
+                    $num_tela = $result;
+                }else{
+                    $num_tela = "N alto p tela";
+                }
+            }
+
         }
     }
 
-    // Se houver um erro, exibir a mensagem.
-    if ($error) {
-        $num = $result;
-    }
 ?>
 
 
@@ -131,12 +154,12 @@
 
         <div class="resultado">
             <p>
-                <?php echo @$num ?>
+                <?php echo @$num_tela ?>
             </p>
         </div>
 
         <form action="" method="POST">
-            <input type="hidden" name="input" value="<?php echo $num; ?>">
+            <input type="hidden" name="input" value="<?php echo $num_tela; ?>">
 
             <div>
                 <input class="ots_funcao" type="submit" name="apagar" value="AC">
