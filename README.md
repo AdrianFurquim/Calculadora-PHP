@@ -13,9 +13,10 @@ proporcionando uma experiência de uso mais fluida. Este projeto foi pensado com
 
 ## Tecnologias Utilizadas
 - **PHP**
+- **JavaScript**
 - **CSS**
 
-<h4 align="center"> Projeto quase Finalizado </h4>
+<h4 align="center"> Projeto Finalizado </h4>
 
 ## Iniciando o Projeto
 **Nota:** O projeto foi desenvolvido para ser executado em um servidor local (localhost) para o PHP.
