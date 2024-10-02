@@ -8,7 +8,6 @@
 
     $num = "";
     $error = false;
-
     $num_tela = "";
 
     // Definindo fuso-horário de São Paulo como padrão.
@@ -18,31 +17,27 @@
 
     // Se o número foi enviado e não houve erro, concatena o número.
     if (isset($_POST['numero'])) {
+        // Verifica se há um valor atual na entrada e não é erro
         if (isset($_POST['input']) && !is_numeric($_POST['input'])) {
-            // Se a entrada atual é um erro, reseta o valor de $num.
-            $num = $_POST['numero'];
+            $num = $_POST['numero']; // Caso seja erro, redefine o número
             $num_tela = $_POST['numero'];
-            
         } else {
-            // Concatenando o número atual ao valor anterior.
-            $ver_valor = isset($_POST['input']) ? $_POST['input'] . $_POST['numero'] : $_POST['numero'];
-
-            if (strlen($ver_valor) <= 8) {
-                $num = isset($_POST['input']) ? $_POST['input'] . $_POST['numero'] : $_POST['numero'];
-                $num_tela = isset($_POST['input']) ? $_POST['input'] . $_POST['numero'] : $_POST['numero'];
-            }else{
-                $num_tela = "N max: 8";
-            }
-        }
+            // Verifica se a entrada anterior existe e concatena
+            $num = isset($_POST['input']) ? $_POST['input'] . $_POST['numero'] : $_POST['numero'];
+            $num_tela = $num;
+            $result = $num_tela;
+            $num_tela = (strlen($result) <= 8) ? $result : "N alto p tela";
             
+        }
     }
 
+    // Operações
     if (isset($_POST['operacao'])) {
-        // Guardar o número atual no cookie.
+        // Guardar o número atual no cookie
         $cookie_value1 = $_POST['input'];
         setcookie($cookie_name1, $cookie_value1, time() + (86400 * 30), "/");
 
-        // Guardar a operação no cookie.
+        // Guardar a operação no cookie
         $cookie_value2 = $_POST['operacao'];
         setcookie($cookie_name2, $cookie_value2, time() + (86400 * 30), "/");
 
@@ -50,7 +45,7 @@
         $num_tela = "";
     }
 
-    // Caso aperte o botão +/- para inverter de positivo ou negativo.
+    // Caso aperte o botão +/- para inverter o sinal do número
     if (isset($_POST['+/-'])) {
         $num = $_POST['input'];
         if ($num != "" && is_numeric($num)) {
@@ -60,12 +55,12 @@
         }
     }
 
-    // Gerando resultrado da conta.
+    // Gerando resultado da conta
     if (isset($_POST['igual'])) {
         $num = $_POST['input'];
-        // Verificação se foi clicado os valores e as operações.
+
+        // Verifica se há operação e número armazenado em cookies
         if (isset($_COOKIE['operacao']) && isset($_COOKIE['numero'])) {
-            // Escolhendo qual opção o usuário selecionou.
             switch ($_COOKIE['operacao']) {
                 case "+":
                     $result = $_COOKIE['numero'] + $num;
@@ -82,7 +77,6 @@
                     } else {
                         $result = "Erro: d/0";
                         $error = true;
-                        
                     }
                     break;
                 case "%":
@@ -92,20 +86,14 @@
                     $result = "Operação inválida";
                     break;
             }
-            // Atualizando na tela.
-            $num = $result;
 
-            // Se houver um erro, exibir a mensagem.
+            // Exibe erro ou resultado formatado
             if ($error) {
                 $num_tela = $result;
-            }else{
-                if(strlen($result) <= 8){
-                    $num_tela = $result;
-                }else{
-                    $num_tela = "N alto p tela";
-                }
+            } else {
+                // Limitar a 8 caracteres no resultado final
+                $num_tela = (strlen($result) <= 8) ? $result : "N alto p tela";
             }
-
         }
     }
 
